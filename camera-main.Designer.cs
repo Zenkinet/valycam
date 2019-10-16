@@ -37,12 +37,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lb_total_time = new System.Windows.Forms.Label();
             this.lb_time_left = new System.Windows.Forms.Label();
+            this.btn_doi_ben = new System.Windows.Forms.Button();
+            this.btn_thu_nho = new System.Windows.Forms.Button();
             this.btn_song_song = new System.Windows.Forms.Button();
             this.btn_ket_thuc = new System.Windows.Forms.Button();
             this.btn_xem_lai = new System.Windows.Forms.Button();
             this.btn_tam_dung = new System.Windows.Forms.Button();
             this.btn_ghi_hinh = new System.Windows.Forms.Button();
-            this.btn_thu_nho = new System.Windows.Forms.Button();
+            this.total_time_text = new System.Windows.Forms.Label();
+            this.time_left_text = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,12 +121,39 @@
             this.lb_time_left.TabIndex = 6;
             this.lb_time_left.Text = "Thời gian còn lại:";
             // 
+            // btn_doi_ben
+            // 
+            this.btn_doi_ben.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_doi_ben.Image = global::DxPropPages.Properties.Resources._2_1_doc;
+            this.btn_doi_ben.Location = new System.Drawing.Point(1151, 27);
+            this.btn_doi_ben.Name = "btn_doi_ben";
+            this.btn_doi_ben.Size = new System.Drawing.Size(87, 78);
+            this.btn_doi_ben.TabIndex = 10;
+            this.btn_doi_ben.Text = "Đổi bên";
+            this.btn_doi_ben.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_doi_ben.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_doi_ben.UseVisualStyleBackColor = true;
+            // 
+            // btn_thu_nho
+            // 
+            this.btn_thu_nho.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_thu_nho.Image = global::DxPropPages.Properties.Resources.bpjkjejdannjfahgbahegaendgjgnpci;
+            this.btn_thu_nho.Location = new System.Drawing.Point(1151, 111);
+            this.btn_thu_nho.Name = "btn_thu_nho";
+            this.btn_thu_nho.Size = new System.Drawing.Size(87, 78);
+            this.btn_thu_nho.TabIndex = 9;
+            this.btn_thu_nho.Text = "Thu nhỏ";
+            this.btn_thu_nho.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_thu_nho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_thu_nho.UseVisualStyleBackColor = true;
+            // 
             // btn_song_song
             // 
+            this.btn_song_song.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_song_song.Image = global::DxPropPages.Properties.Resources._1_2_doc;
-            this.btn_song_song.Location = new System.Drawing.Point(1070, 27);
+            this.btn_song_song.Location = new System.Drawing.Point(1047, 27);
             this.btn_song_song.Name = "btn_song_song";
-            this.btn_song_song.Size = new System.Drawing.Size(75, 58);
+            this.btn_song_song.Size = new System.Drawing.Size(98, 78);
             this.btn_song_song.TabIndex = 8;
             this.btn_song_song.Text = "Song song";
             this.btn_song_song.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -132,10 +162,11 @@
             // 
             // btn_ket_thuc
             // 
+            this.btn_ket_thuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_ket_thuc.Image = global::DxPropPages.Properties.Resources.stop_button;
-            this.btn_ket_thuc.Location = new System.Drawing.Point(565, 572);
+            this.btn_ket_thuc.Location = new System.Drawing.Point(549, 572);
             this.btn_ket_thuc.Name = "btn_ket_thuc";
-            this.btn_ket_thuc.Size = new System.Drawing.Size(75, 58);
+            this.btn_ket_thuc.Size = new System.Drawing.Size(91, 58);
             this.btn_ket_thuc.TabIndex = 7;
             this.btn_ket_thuc.Text = "Kết thúc (F8)";
             this.btn_ket_thuc.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -144,10 +175,11 @@
             // 
             // btn_xem_lai
             // 
+            this.btn_xem_lai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_xem_lai.Image = global::DxPropPages.Properties.Resources.Hopstarter_Soft_Scraps_Button_Play;
-            this.btn_xem_lai.Location = new System.Drawing.Point(322, 572);
+            this.btn_xem_lai.Location = new System.Drawing.Point(292, 572);
             this.btn_xem_lai.Name = "btn_xem_lai";
-            this.btn_xem_lai.Size = new System.Drawing.Size(75, 58);
+            this.btn_xem_lai.Size = new System.Drawing.Size(98, 58);
             this.btn_xem_lai.TabIndex = 4;
             this.btn_xem_lai.Text = "Xem lại (F7)";
             this.btn_xem_lai.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -156,10 +188,11 @@
             // 
             // btn_tam_dung
             // 
+            this.btn_tam_dung.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_tam_dung.Image = global::DxPropPages.Properties.Resources.Custom_Icon_Design_Flatastic_8_Pause;
-            this.btn_tam_dung.Location = new System.Drawing.Point(241, 572);
+            this.btn_tam_dung.Location = new System.Drawing.Point(132, 573);
             this.btn_tam_dung.Name = "btn_tam_dung";
-            this.btn_tam_dung.Size = new System.Drawing.Size(75, 58);
+            this.btn_tam_dung.Size = new System.Drawing.Size(92, 58);
             this.btn_tam_dung.TabIndex = 3;
             this.btn_tam_dung.Text = "Tạm dừng (F6)";
             this.btn_tam_dung.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -168,33 +201,45 @@
             // 
             // btn_ghi_hinh
             // 
+            this.btn_ghi_hinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_ghi_hinh.Image = global::DxPropPages.Properties.Resources.record2;
-            this.btn_ghi_hinh.Location = new System.Drawing.Point(168, 572);
+            this.btn_ghi_hinh.Location = new System.Drawing.Point(12, 573);
             this.btn_ghi_hinh.Name = "btn_ghi_hinh";
-            this.btn_ghi_hinh.Size = new System.Drawing.Size(67, 58);
+            this.btn_ghi_hinh.Size = new System.Drawing.Size(91, 58);
             this.btn_ghi_hinh.TabIndex = 2;
             this.btn_ghi_hinh.Text = "Ghi hình (F5)";
             this.btn_ghi_hinh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_ghi_hinh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_ghi_hinh.UseVisualStyleBackColor = true;
             // 
-            // btn_thu_nho
+            // total_time_text
             // 
-            this.btn_thu_nho.Image = global::DxPropPages.Properties.Resources.bpjkjejdannjfahgbahegaendgjgnpci;
-            this.btn_thu_nho.Location = new System.Drawing.Point(1151, 27);
-            this.btn_thu_nho.Name = "btn_thu_nho";
-            this.btn_thu_nho.Size = new System.Drawing.Size(75, 58);
-            this.btn_thu_nho.TabIndex = 9;
-            this.btn_thu_nho.Text = "Thu nhỏ";
-            this.btn_thu_nho.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btn_thu_nho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btn_thu_nho.UseVisualStyleBackColor = true;
+            this.total_time_text.AutoSize = true;
+            this.total_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total_time_text.Location = new System.Drawing.Point(923, 572);
+            this.total_time_text.Name = "total_time_text";
+            this.total_time_text.Size = new System.Drawing.Size(44, 17);
+            this.total_time_text.TabIndex = 11;
+            this.total_time_text.Text = "15:15";
+            // 
+            // time_left_text
+            // 
+            this.time_left_text.AutoSize = true;
+            this.time_left_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.time_left_text.Location = new System.Drawing.Point(923, 601);
+            this.time_left_text.Name = "time_left_text";
+            this.time_left_text.Size = new System.Drawing.Size(44, 17);
+            this.time_left_text.TabIndex = 12;
+            this.time_left_text.Text = "50:59";
             // 
             // camera_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1238, 655);
+            this.Controls.Add(this.time_left_text);
+            this.Controls.Add(this.total_time_text);
+            this.Controls.Add(this.btn_doi_ben);
             this.Controls.Add(this.btn_thu_nho);
             this.Controls.Add(this.btn_song_song);
             this.Controls.Add(this.btn_ket_thuc);
@@ -232,5 +277,8 @@
         private System.Windows.Forms.Button btn_ket_thuc;
         private System.Windows.Forms.Button btn_song_song;
         private System.Windows.Forms.Button btn_thu_nho;
+        private System.Windows.Forms.Button btn_doi_ben;
+        private System.Windows.Forms.Label total_time_text;
+        private System.Windows.Forms.Label time_left_text;
     }
 }
