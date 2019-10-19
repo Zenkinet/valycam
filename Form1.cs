@@ -232,11 +232,11 @@ namespace DirectShowLib.Samples
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
-		[STAThread]
+		/*[STAThread]
 		static void Main() 
 		{
 			Application.Run(new Form1());
-		}
+		}*/
 
 		/// <summary>
 		/// Stop recording and release the graph

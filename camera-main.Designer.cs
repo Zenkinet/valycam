@@ -133,6 +133,7 @@
             this.btn_doi_ben.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_doi_ben.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_doi_ben.UseVisualStyleBackColor = true;
+            this.btn_doi_ben.Click += new System.EventHandler(this.btn_doi_ben_Click);
             // 
             // btn_thu_nho
             // 
@@ -146,6 +147,7 @@
             this.btn_thu_nho.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_thu_nho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_thu_nho.UseVisualStyleBackColor = true;
+            this.btn_thu_nho.Click += new System.EventHandler(this.btn_thu_nho_Click);
             // 
             // btn_song_song
             // 
@@ -159,6 +161,7 @@
             this.btn_song_song.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_song_song.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_song_song.UseVisualStyleBackColor = true;
+            this.btn_song_song.Click += new System.EventHandler(this.btn_song_song_Click);
             // 
             // btn_ket_thuc
             // 
