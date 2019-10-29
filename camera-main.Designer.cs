@@ -175,6 +175,7 @@
             this.btn_ket_thuc.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_ket_thuc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_ket_thuc.UseVisualStyleBackColor = true;
+            this.btn_ket_thuc.Click += new System.EventHandler(this.btn_ket_thuc_Click);
             // 
             // btn_xem_lai
             // 

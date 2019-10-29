@@ -47,6 +47,7 @@ namespace DxPropPages
 
             initGraph(panel1.ClientRectangle, panel1.Handle);
             pMC.Run();
+
         }
 
         private IBaseFilter CreateFilter(Guid category, string friendlyname)
@@ -204,6 +205,12 @@ namespace DxPropPages
 
             pMix.SetOutputRect(0, _0rect);
             pMix.SetOutputRect(1, _1rect);
+        }
+
+        private void btn_ket_thuc_Click(object sender, EventArgs e)
+        {
+            WriteDVD formWriteDVD = new WriteDVD();
+            formWriteDVD.Show();
         }
     }
 }

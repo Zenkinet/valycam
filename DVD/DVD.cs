@@ -350,10 +350,8 @@ namespace testMedia.DVD
 
         private void backgrounfBurnWorker_Complete(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine("backgrounfBurnWorker_Complete");
+            MessageBox.Show("Burn completed");
         }
-
-        //public void WriteFile(IDiscRecorder2 disk, IMediaItem mediaItem, Func<>);
 
     }
 }
