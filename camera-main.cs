@@ -40,10 +40,20 @@ namespace DxPropPages
             InitializeComponent();
             
             DsDevice[] devs = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-            
-            devices = new IBaseFilter[2]; 
+            devices = new IBaseFilter[2];
+
+            if (devs.Length <= 0)
+            {
+                MessageBox.Show("Cannot find any camera !");
+                return;
+            }
+
             devices[0] = CreateFilter(FilterCategory.VideoInputDevice, devs[0].Name);
-            devices[1] = CreateFilter(FilterCategory.VideoInputDevice, devs[1].Name);
+
+            if (devs.Length >= 2)
+            {
+                devices[1] = CreateFilter(FilterCategory.VideoInputDevice, devs[1].Name);
+            }
 
             initGraph(panel1.ClientRectangle, panel1.Handle);
             pMC.Run();
