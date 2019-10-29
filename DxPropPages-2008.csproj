@@ -97,6 +97,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Pause.ico" />
     <None Include="Resources\record2.png" />
     <None Include="Resources\pro.png" />
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="camera-main.resx">
       <DependentUpon>camera-main.cs</DependentUpon>
     </EmbeddedResource>
