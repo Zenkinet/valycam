@@ -93,7 +93,7 @@ namespace DxPropPages
         {
             pGB = (IGraphBuilder)new FilterGraph();
             pVmr = (IBaseFilter)new VideoMixingRenderer9();
-            compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, "DV Video Encoder");
+            compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, "MJPEG Compressor");
             pGB.AddFilter(pVmr, "Video");
             pGB.AddFilter(captureVideo, "VideoCapture");
             pGB.AddFilter(compressVideo, "Encoder");
@@ -270,7 +270,8 @@ namespace DxPropPages
 
         private void btn_ket_thuc_Click(object sender, EventArgs e)
         {
-            pMC.Stop();
+            if(pMC != null)
+                pMC.Stop();
             WriteDVD formWriteDVD = new WriteDVD();
             formWriteDVD.Show();
         }
