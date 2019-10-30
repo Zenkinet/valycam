@@ -267,6 +267,7 @@ namespace DxPropPages
 
         private void btn_ket_thuc_Click(object sender, EventArgs e)
         {
+            pMC.Stop();
             WriteDVD formWriteDVD = new WriteDVD();
             formWriteDVD.Show();
         }
