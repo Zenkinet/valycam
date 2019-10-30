@@ -21,19 +21,24 @@ namespace DxPropPages
         public WriteDVD()
         {
             InitializeComponent();
+        }
 
+        private void WriteDVD_Load(object sender, EventArgs e)
+        {
             // find all disk on computer
             deviceComboBox.SelectedIndex = -1;
             RecordDisk_List = dvd_1.findAllDisk();
+            if (RecordDisk_List == null)
+            {
+                MessageBox.Show("Don't have disk");
+                this.Close();
+                return;
+            }
             foreach (IDiscRecorder2 d in RecordDisk_List)
             {
                 //MessageBox.Show(d.ProductId);
                 deviceComboBox.Items.Add(d.ProductId);
             }
-        }
-
-        private void WriteDVD_Load(object sender, EventArgs e)
-        {
 
         }
 
