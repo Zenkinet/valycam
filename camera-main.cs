@@ -17,6 +17,8 @@ namespace DxPropPages
         const int DUAL = 1;
 
         IBaseFilter[] devices;
+        IBaseFilter audioCapture;
+        IBaseFilter captureVideo;
         int mode = DUAL;
         NormalizedRect _0rect = new NormalizedRect();
         NormalizedRect _1rect = new NormalizedRect();
@@ -53,6 +55,13 @@ namespace DxPropPages
             if (devs.Length >= 2)
                 devices[1] = CreateFilter(FilterCategory.VideoInputDevice, devs[1].Name);
 
+            DsDevice[] auds = DsDevice.GetDevicesOfCat(FilterCategory.AudioInputDevice);
+            if (auds.Length < 0) {
+                MessageBox.Show("Cannot find any microphone !");
+                return;
+            }
+            audioCapture = CreateFilter(FilterCategory.AudioInputDevice, auds[0].Name);
+
             initGraph(panel1.ClientRectangle, panel1.Handle);
             pMC.Run();
 
@@ -84,6 +93,7 @@ namespace DxPropPages
             pGB = (IGraphBuilder)new FilterGraph();
             pVmr = (IBaseFilter)new VideoMixingRenderer9();
             pGB.AddFilter(pVmr, "Video");
+            pGB.AddFilter(captureVideo, "VideoCapture");
             
             pConfig = (IVMRFilterConfig9)pVmr;
             pConfig.SetRenderingMode(VMR9Mode.Windowless);
@@ -101,6 +111,7 @@ namespace DxPropPages
             pGB.AddFilter(devices[0], "Camera-1");
             if(devices[1] != null)
                 pGB.AddFilter(devices[1], "Camera-2");
+            pGB.AddFilter(audioCapture,"Audio Capture");
 
             Rectangle win = rect;
             float _w = win.Width;
@@ -122,6 +133,10 @@ namespace DxPropPages
             pMix.SetOutputRect(1, _1rect);
 
             int hr = 0;
+            IFileSinkFilter sink = null;
+            hr = cc.SetOutputFileName(MediaSubType.Avi, "VideoCaptured.avi", out captureVideo, out sink);
+            DsError.ThrowExceptionForHR(hr);
+
             hr = cc.RenderStream(PinCategory.Preview, MediaType.Video, devices[0], null, pVmr);
             DsError.ThrowExceptionForHR(hr);
             if (devices[1] != null)
@@ -129,6 +144,10 @@ namespace DxPropPages
                 hr = cc.RenderStream(PinCategory.Preview, MediaType.Video, devices[1], null, pVmr);
                 DsError.ThrowExceptionForHR(hr);
             }
+            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], null, captureVideo);
+            DsError.ThrowExceptionForHR(hr);
+            hr = cc.RenderStream(PinCategory.Capture, MediaType.Audio, audioCapture, null, captureVideo);
+            DsError.ThrowExceptionForHR(hr);
 
             Marshal.ReleaseComObject(cc);
         }
