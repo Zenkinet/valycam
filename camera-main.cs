@@ -40,7 +40,7 @@ namespace DxPropPages
             InitializeComponent();
             
             DsDevice[] devs = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-            devices = new IBaseFilter[2];
+            devices = new IBaseFilter[2] {null, null};
 
             if (devs.Length <= 0)
             {
@@ -51,13 +51,16 @@ namespace DxPropPages
             devices[0] = CreateFilter(FilterCategory.VideoInputDevice, devs[0].Name);
 
             if (devs.Length >= 2)
-            {
                 devices[1] = CreateFilter(FilterCategory.VideoInputDevice, devs[1].Name);
-            }
 
             initGraph(panel1.ClientRectangle, panel1.Handle);
             pMC.Run();
 
+        }
+
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
         }
 
         private IBaseFilter CreateFilter(Guid category, string friendlyname)
@@ -96,7 +99,8 @@ namespace DxPropPages
             ICaptureGraphBuilder2 cc = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
             cc.SetFiltergraph(pGB);
             pGB.AddFilter(devices[0], "Camera-1");
-            pGB.AddFilter(devices[1], "Camera-2");
+            if(devices[1] != null)
+                pGB.AddFilter(devices[1], "Camera-2");
 
             Rectangle win = rect;
             float _w = win.Width;
@@ -118,16 +122,25 @@ namespace DxPropPages
             pMix.SetOutputRect(1, _1rect);
 
             int hr = 0;
-            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], null, pVmr);
+            hr = cc.RenderStream(PinCategory.Preview, MediaType.Video, devices[0], null, pVmr);
             DsError.ThrowExceptionForHR(hr);
-            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[1], null, pVmr);
-            DsError.ThrowExceptionForHR(hr);
+            if (devices[1] != null)
+            {
+                hr = cc.RenderStream(PinCategory.Preview, MediaType.Video, devices[1], null, pVmr);
+                DsError.ThrowExceptionForHR(hr);
+            }
 
             Marshal.ReleaseComObject(cc);
         }
 
         private void btn_song_song_Click(object sender, EventArgs e)
         {
+            if (devices[0] == null && devices[1] == null)
+            {
+                MessageBox.Show("No camera !");
+                return;
+            }
+
             if (mode == SINGLE)
             {
                 mode = DUAL;
@@ -147,7 +160,8 @@ namespace DxPropPages
                 _1rect.bottom = win.Bottom / _H;
 
                 pMix.SetOutputRect(0, _0rect);
-                pMix.SetOutputRect(1, _1rect);
+                if(devices[1] != null)
+                    pMix.SetOutputRect(1, _1rect);
             }
             else
             {
@@ -168,12 +182,19 @@ namespace DxPropPages
                 _1rect.bottom = win.Top;
 
                 pMix.SetOutputRect(0, _0rect);
-                pMix.SetOutputRect(1, _1rect);
+                if(devices[1] != null)
+                    pMix.SetOutputRect(1, _1rect);
             }
         }
 
         private void btn_doi_ben_Click(object sender, EventArgs e)
         {
+            if (devices[0] == null && devices[1] == null)
+            {
+                MessageBox.Show("No camera !");
+                return;
+            }
+
             NormalizedRect tmp;
             tmp.top = _0rect.top;
             tmp.left = _0rect.left;
@@ -191,11 +212,18 @@ namespace DxPropPages
             _1rect.bottom = tmp.bottom;
 
             pMix.SetOutputRect(0, _0rect);
-            pMix.SetOutputRect(1, _1rect);
+            if(devices[1] != null)
+                pMix.SetOutputRect(1, _1rect);
         }
 
         private void btn_thu_nho_Click(object sender, EventArgs e)
         {
+            if (devices[0] == null && devices[1] == null)
+            {
+                MessageBox.Show("No camera !");
+                return;
+            }
+
             Rectangle win = panel1.ClientRectangle;
             float _w = win.Width;
             float _H = win.Height;
@@ -214,7 +242,8 @@ namespace DxPropPages
             _1rect.bottom = ((win.Bottom - PADDING) / _H);
 
             pMix.SetOutputRect(0, _0rect);
-            pMix.SetOutputRect(1, _1rect);
+            if(devices[1] != null)
+                pMix.SetOutputRect(1, _1rect);
         }
 
         private void btn_ket_thuc_Click(object sender, EventArgs e)
