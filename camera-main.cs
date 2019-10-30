@@ -19,6 +19,7 @@ namespace DxPropPages
         IBaseFilter[] devices;
         IBaseFilter audioCapture;
         IBaseFilter captureVideo;
+        IBaseFilter compressVideo;
         int mode = DUAL;
         NormalizedRect _0rect = new NormalizedRect();
         NormalizedRect _1rect = new NormalizedRect();
@@ -92,8 +93,10 @@ namespace DxPropPages
         {
             pGB = (IGraphBuilder)new FilterGraph();
             pVmr = (IBaseFilter)new VideoMixingRenderer9();
+            compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, "DV Video Encoder");
             pGB.AddFilter(pVmr, "Video");
             pGB.AddFilter(captureVideo, "VideoCapture");
+            pGB.AddFilter(compressVideo, "Encoder");
             
             pConfig = (IVMRFilterConfig9)pVmr;
             pConfig.SetRenderingMode(VMR9Mode.Windowless);
@@ -144,7 +147,7 @@ namespace DxPropPages
                 hr = cc.RenderStream(PinCategory.Preview, MediaType.Video, devices[1], null, pVmr);
                 DsError.ThrowExceptionForHR(hr);
             }
-            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], null, captureVideo);
+            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], compressVideo, captureVideo);
             DsError.ThrowExceptionForHR(hr);
             hr = cc.RenderStream(PinCategory.Capture, MediaType.Audio, audioCapture, null, captureVideo);
             DsError.ThrowExceptionForHR(hr);
