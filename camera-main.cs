@@ -31,6 +31,7 @@ namespace DxPropPages
         IVMRMixerControl9 pMix;
         IMediaSeeking pMs;
         IMediaControl pMC;
+        List<string> lstCompressor = new List<string>(10);
 
         [STAThread]
         static void Main()
@@ -62,7 +63,10 @@ namespace DxPropPages
                 return;
             }
             audioCapture = CreateFilter(FilterCategory.AudioInputDevice, auds[0].Name);
-
+            foreach (DsDevice ds in DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory))
+            {
+                lstCompressor.Add(ds.Name);
+            }
             initGraph(panel1.ClientRectangle, panel1.Handle);
             pMC.Run();
 
@@ -93,7 +97,7 @@ namespace DxPropPages
         {
             pGB = (IGraphBuilder)new FilterGraph();
             pVmr = (IBaseFilter)new VideoMixingRenderer9();
-            compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, "MJPEG Compressor");
+            compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, lstCompressor[3]);
             pGB.AddFilter(pVmr, "Video");
             pGB.AddFilter(captureVideo, "VideoCapture");
             pGB.AddFilter(compressVideo, "Encoder");
