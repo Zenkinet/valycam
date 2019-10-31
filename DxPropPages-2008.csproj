@@ -116,6 +116,7 @@
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LogDebug.cs" />
     <Compile Include="WriteDVD.cs">
       <SubType>Form</SubType>
     </Compile>
