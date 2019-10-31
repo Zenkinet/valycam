@@ -44,7 +44,7 @@ namespace DxPropPages
             InitializeComponent();
             log = new LogDebug();
             log.createLogFile();
-            log.writeLog("Start tool");
+            log.writeLog("Start tool v1.0");
             DsDevice[] devs = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
             devices = new IBaseFilter[2] {null, null};
 
@@ -55,7 +55,7 @@ namespace DxPropPages
             }
 
             devices[0] = CreateFilter(FilterCategory.VideoInputDevice, devs[0].Name);
-
+            log.writeLog(devs[0].Name);
             if (devs.Length >= 2)
                 devices[1] = CreateFilter(FilterCategory.VideoInputDevice, devs[1].Name);
 
@@ -67,6 +67,7 @@ namespace DxPropPages
             audioCapture = CreateFilter(FilterCategory.AudioInputDevice, auds[0].Name);
             foreach (DsDevice ds in DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory))
             {
+                log.writeLog(ds.Name);
                 lstCompressor.Add(ds.Name);
             }
             initGraph(panel1.ClientRectangle, panel1.Handle);
@@ -103,7 +104,7 @@ namespace DxPropPages
             compressVideo = CreateFilter(FilterCategory.VideoCompressorCategory, lstCompressor[3]);
             pGB.AddFilter(pVmr, "Video");
             pGB.AddFilter(captureVideo, "VideoCapture");
-            pGB.AddFilter(compressVideo, "Encoder");
+            //pGB.AddFilter(compressVideo, "Encoder");
             
             pConfig = (IVMRFilterConfig9)pVmr;
             pConfig.SetRenderingMode(VMR9Mode.Windowless);
@@ -159,14 +160,14 @@ namespace DxPropPages
                 DsError.ThrowExceptionForHR(hr);
                 log.writeLog("Create cam-2 to preview success");
             }
-            log.writeLog("Start capture audio");
-            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], compressVideo, captureVideo);
-            DsError.ThrowExceptionForHR(hr);
-            log.writeLog("Success to capture audio");
             log.writeLog("Start capture video from cam-1");
-            hr = cc.RenderStream(PinCategory.Capture, MediaType.Audio, audioCapture, null, captureVideo);
+            hr = cc.RenderStream(PinCategory.Capture, MediaType.Video, devices[0], null, captureVideo);
             DsError.ThrowExceptionForHR(hr);
             log.writeLog("success create capture from cam-1");
+            log.writeLog("Start capture audio");
+            hr = cc.RenderStream(PinCategory.Capture, MediaType.Audio, audioCapture, null, captureVideo);
+            DsError.ThrowExceptionForHR(hr);
+            log.writeLog("Success to capture audio");
 
             Marshal.ReleaseComObject(cc);
         }
