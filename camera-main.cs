@@ -298,5 +298,17 @@ namespace DxPropPages
             AboutBox1 ab = new AboutBox1();
             ab.Show();
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigForm cf = new ConfigForm();
+            cf.Show();
+        }
+
+        private void phiênLàmViệcMớiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            info_input info = new info_input();
+            info.Show();
+        }
     }
 }
